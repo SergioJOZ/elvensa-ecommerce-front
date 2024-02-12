@@ -1,0 +1,38 @@
+{
+  "name": "ecommerce-front",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@auth/mongodb-adapter": "^2.0.6",
+    "@material-tailwind/react": "^2.1.8",
+    "axios": "^1.6.2",
+    "bcryptjs": "^2.4.3",
+    "filestack-js": "^3.29.0",
+    "filestack-react": "^5.0.0",
+    "mongodb": "^6.3.0",
+    "mongodb-adapter": "^0.0.4",
+    "mongoose": "^8.0.1",
+    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-sequence": "^6.0.0",
+    "next": "14.0.2",
+    "next-auth": "^4.24.5",
+    "openai": "^4.20.1",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-sortablejs": "^6.1.4",
+    "styled-components": "^6.1.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.2",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1"
+  }
+}

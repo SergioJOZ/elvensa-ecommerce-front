@@ -10,73 +10,78 @@ import Button from "./Button";
 import axios from "axios";
 
 const StyledHeader = styled.header`
-    background-color: #0B0541;
+  background-color: #0b0541;
 `;
 
 const Wrapper = styled.div`
-display:flex;
-justify-content: space-between;
-padding: 20px 0;
-padding-left: 20px;
-padding-right: 20px`;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+  padding-left: 20px;
+  padding-right: 20px;
+`;
 
 const StyledNav = styled.nav`
-display:flex;
-gap: 15px;
-align-content: center;
-flex-wrap: wrap
+  display: flex;
+  gap: 15px;
+  align-content: center;
+  flex-wrap: wrap;
 `;
 
 const NavLink = styled(Link)`
-    color: #84879B;
-    text-decoration: none;
-    &:hover{
-        color: white;
-        font-size: 1.125rem;
-        transition-delay: 100ms;
-    };
+  color: #84879b;
+  text-decoration: none;
+  &:hover {
+    color: white;
+    font-size: 1.125rem;
+    transition-delay: 100ms;
+  }
 `;
 
+export default function Header() {
+  const { data } = useSession();
+  const { cartProducts } = useContext(CartContext);
+  const router = useRouter();
 
+  async function logout() {
+    await router.push("/");
+    await signOut();
+  }
 
+  return (
+    <StyledHeader>
+      <Wrapper>
+        <Link href={"/"}>
+          <Image
+            src={"/images/logoLetrasFondoBlanco.png"}
+            width={300}
+            height={100}
+            alt="Elvensa Web"
+          />
+        </Link>
+        <StyledNav>
+          <NavLink href={"/"}>Inicio</NavLink>
+          <NavLink href={"/products"}>Cátalogo</NavLink>
+          {!data ? (
+            <>
+              <NavLink href={"/login"}>Iniciar sesión</NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink href={"/account"}>Tu cuenta</NavLink>
+              {
+                <NavLink href={"/cart"}>
+                  Carrito de compras ({cartProducts.length})
+                </NavLink>
+              }
 
-export default function Header(){
-    const {data} = useSession();
-    const {cartProducts} = useContext(CartContext);
-    const router = useRouter();
-
-    async function logout(){
-        await router.push('/');
-        await signOut();
-    }
-
-    return(
-<StyledHeader>
-    
-        <Wrapper>
-            <Link href={'/'}>
-                <Image src={'/images/logoLetrasFondoBlanco.png'} width={300} height={100} alt="Elvensa Web" />
-            </Link>
-            <StyledNav>
-                <NavLink href={'/'}>Inicio</NavLink>
-                <NavLink href={'/chatbot'}>Chatbot</NavLink>
-                <NavLink href={'/products'}>Cátalogo</NavLink>
-                {!data ? (
-                <>
-                <NavLink href={"/login"}>Iniciar sesión</NavLink>
-                
-                </>) : 
-                (
-                <>
-                <NavLink href={'/account'}>Tu cuenta</NavLink>
-                {<NavLink href={'/cart'}>Carrito de compras ({cartProducts.length})</NavLink>}
-                
-                <Button primary={true} onClick={logout}>Cerrar sesión</Button>
-                </>)
-                }
-                
-            </StyledNav>
-        </Wrapper>
-    
-</StyledHeader>)
+              <Button primary={true} onClick={logout}>
+                Cerrar sesión
+              </Button>
+            </>
+          )}
+        </StyledNav>
+      </Wrapper>
+    </StyledHeader>
+  );
 }
